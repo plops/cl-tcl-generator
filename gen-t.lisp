@@ -139,7 +139,7 @@
 				(space
 				 ,(row `(out (string "~{~a~^ ~}") (emits args))))
 				(string
-				 ,(row `(out (string "\"~{~a~}\"") (emits args))))
+				 ,(row `(out (string "\\\"~{~a~}\\\"") (emits args))))
 				(quote
 				 ,(row `(out (string "{~{~a~^ ~}}") (emits args))))
 				
@@ -259,6 +259,13 @@
 						do
 						(outln (string "~a") (emit arg)))
 					  )))
+				(semi
+				 ,(row `(progn
+					  
+					  (loop for arg in args
+						do
+						(outsemiln (string "~a") (emit arg)))
+					  )))
 				#+nil (progn
 				  ,(row `(progn
 					  (outln (string "begin"))
@@ -299,7 +306,9 @@
 			       ((integerp code)
 				(format nil (string "~a") code))
 			       (t
-				(string "float not supported")))))))
+				(format nil (string "~a") code)
+				;(string "float not supported")
+				))))))
 		     (string ""))))
 	      
 	     
