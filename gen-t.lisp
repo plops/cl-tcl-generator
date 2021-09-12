@@ -132,10 +132,16 @@
 				 ,(row `(out (string "~{~a~^, ~}") (emits args))))
 				(paren
 				 ,(row `(out (string "(~{~a~^, ~})") (emits args))))
+				(bracket
+				 ,(row `(out (string "[~{~a~^ ~}]") (emits args))))
 				(concat
 				 ,(row `(out (string "{~{~a~^, ~}}") (emits args))))
 				(space
-				 ,(row `(out (string "~{~a~^, ~}") (emits args))))
+				 ,(row `(out (string "~{~a~^ ~}") (emits args))))
+				(string
+				 ,(row `(out (string "\"~{~a~}\"") (emits args))))
+				(quote
+				 ,(row `(out (string "{~{~a~^ ~}}") (emits args))))
 				
 				,@(loop for op in `(or (and "&") 
 						       + -
@@ -272,11 +278,11 @@
 								  by #'cddr
 								  collect
 								  e)))
-						(out (string "~a~a") name
-							(emit "`(paren ,@(append
+						(out (string "~a ~a") name
+							(emit "`(space ,@(append
 									 positional
 									 (loop for e in props collect
-									       `(,(format nil \".~a\" e) ,(getf plist e)))))")))
+									       `(space ,(format nil \"-~a\" e) ,(getf plist e)))))")))
 					      #+nil (out (string "~a~a")
 							 (emit name)
 							 (emit "`(paren ,@args)"))))

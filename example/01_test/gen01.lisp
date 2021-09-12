@@ -14,8 +14,9 @@
   (write-source
    (format nil "~a/source/test01.tcl" *path*)
    `(do0
+     ;;https://wiki.tcl-lang.org/page/Show+me+an+example
      (space package require Tk)
      (button .b :text (quote Push Me)
-	     :command (quote tk_messageBox))
-     ))
+		:command (quote (tk_messageBox :message (quote "hello," world))))
+     (pack .b)))
   )
