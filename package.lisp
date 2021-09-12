@@ -1,6 +1,6 @@
-(defpackage :cl-verilog-generator
+(defpackage :cl-tcl-generator
   (:use :cl
 	:alexandria)
   (:export
    #:write-source
-   #:emit-v))
+   #:emit-t))
